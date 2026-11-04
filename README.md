@@ -10,6 +10,10 @@ This mirror for, errrr, like, educational purpose, either to download for your o
 
 If the original game updates, here is how you can update the mirror:
 
+The automated script downloads manifest entries concurrently. Set
+`DOWNLOAD_CONNECTIONS` to change the number of simultaneous downloads
+(defaults to `8`), then run `DOWNLOAD_CONNECTIONS=16 ./update.sh`.
+
 #### 1. Fetch all new images :
 
 From the root,
