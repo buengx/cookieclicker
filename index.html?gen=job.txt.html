@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript">
+    window.cookieconsent_options = {"message":"Parts of this website's functionality rely on browser cookies.","dismiss":"Neat!","learnMore":"More info","link":null,"theme":"https://orteil.dashnet.org/cookieconsent.css","domain":"dashnet.org"};
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
+
+<title>RandomGen</title>
+<meta charset="utf-8">
+<meta property="og:site_name" content="DashNet">
+<meta property="og:title" content="RandomGen">
+<meta property="og:type" content="website">
+<meta property="og:description" content="A tool to create your own random generators, by Orteil.">
+<meta property="og:url" content="https://orteil.dashnet.org/randomgen">
+<meta name="theme-color" content="#a07485">
+<meta name="twitter:card" content="summary_large_image">
+
+<!--
+Code and graphics copyright Orteil, 2014-2023
+Feel free to alter this code to your liking, but please do not re-host it, do not profit from it and do not present it as your own.
+-->
+
+<link href="style.css%3Fv=4.css" rel="stylesheet" type="text/css">
+<script src="pluralize.js%3Fv=a"></script>
+<script src="main.js%3Fv=6"></script>
+<style type="text/css">@font-face {font-family:'Oswald';font-style:normal;font-weight:400;src:url(s/oswald/5.2.8/cyrillic/400/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:400;src:url(s/oswald/5.2.8/latin-ext/400/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:400;src:url(s/oswald/5.2.8/vietnamese/400/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:400;src:url(s/oswald/5.2.8/latin/400/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:400;src:url(s/oswald/5.2.8/cyrillic-ext/400/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:300;src:url(s/oswald/5.2.8/latin/300/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:300;src:url(s/oswald/5.2.8/cyrillic-ext/300/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:300;src:url(s/oswald/5.2.8/cyrillic/300/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:300;src:url(s/oswald/5.2.8/vietnamese/300/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:300;src:url(s/oswald/5.2.8/latin-ext/300/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:700;src:url(s/oswald/5.2.8/latin/700/normal.woff2);unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:700;src:url(s/oswald/5.2.8/vietnamese/700/normal.woff2);unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:700;src:url(s/oswald/5.2.8/cyrillic/700/normal.woff2);unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:700;src:url(s/oswald/5.2.8/latin-ext/700/normal.woff2);unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;font-display:swap;}@font-face {font-family:'Oswald';font-style:normal;font-weight:700;src:url(s/oswald/5.2.8/cyrillic-ext/700/normal.woff2);unicode-range:U+0460-052F,U+1C80-1C8A,U+20B4,U+2DE0-2DFF,U+A640-A69F,U+FE2E-FE2F;font-display:swap;}</style>
+
+
+</head>
+<body id="body">
+
+<div id="wrapper">
+
+<div id="host">hosted by <a href="https://dashnet.org" target="_blank">DashNet</a></div>
+
+	<div id="topBar">
+		<div><b><a href="https://orteil.dashnet.org/randomgen/">RandomGen</a></b> by <a href="index.html" target="_blank">Orteil</a>
+		<small>(<a href="http://twitter.com/orteil42" target="_blank">twitter</a> |
+		<a href="http://orteil42.tumblr.com" target="_blank">tumblr</a>)</small></div>
+		<div class="hoverer"><a target="_blank">Generators</a>
+			<div class="hoverable">
+				<a href="index.html%3Fgen=names.txt.html">Name generator</a>
+				<a href="index.html%3Fgen=color.txt.html">Color generator</a>
+				<a href="index.html%3Fgen=animal.txt.html">Animal generator</a>
+				<a href="index.html%3Fgen=creature.txt.html">Creature generator</a>
+				<a href="index.html%3Fgen=nouns.txt.html">Noun generator</a>
+				<a href="index.html%3Fgen=job.txt.html">Job generator</a>
+				<a href="index.html%3Fgen=corvophraser.txt.html">Corvophraser</a>
+				<a href="index.html%3Fgen=cookie.txt.html">Cookie generator</a>
+				<a href="index.html%3Fgen=loot.txt.html">Dungeon loot generator</a>
+				<a href="index.html%3Fgen=scp.txt.html">SCP generator</a>
+				<a href="index.html%3Fgen=feast.txt.html">Feast generator</a>
+				<a href="index.html%3Fgen=haiku.txt.html">Haiku generator</a>
+				<a href="index.html%3Fgen=setting.txt.html">Setting generator</a>
+				<div style="cursor:auto;opacity:0.5;text-align:center;">(shindans)</div>
+				<a href="index.html%3Fgen=pastlife.txt.html">Past life</a>
+				<a href="index.html%3Fgen=animalshindan.txt.html">Animal shindan</a>
+				<a href="index.html%3Fgen=whoareyou.txt.html">Who are you</a>
+			</div>
+		</div>
+		<div><a href="index.html%3Fdo=create.html">Make your own</a></div>
+		<!--<div style="color:#f99;" class="hoverer">this is a beta
+			<div class="hoverable"><div style="padding:4px;color:#f99;text-align:center;">stuff might break yo</div></div>
+		</div>-->
+		<div><a href="https://discordapp.com/invite/cookie" target="_blank">Discord</a></div>
+		<div>also : <a href="https://orteil.dashnet.org/cookieclicker" target="_blank">Cookie Clicker</a>, <a href="nested.html" target="_blank">Nested</a></div>
+	</div>
+
+	<div id="gameWrapper">
+		<div id="game">
+			<div id="supportContainer" style="padding:0px;" class="middle">
+				<div id="support">
+					<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+					<!-- RandomGen -->
+					<ins class="adsbygoogle"
+						 style="display:inline-block;width:160px;height:600px"
+						 data-ad-client="ca-pub-8491708950677704"
+						 data-ad-slot="4648486497"></ins>
+					<script>
+					(adsbygoogle = window.adsbygoogle || []).push({});
+					</script>
+				</div>
+			</div>
+			<!--<div id="starter" class="middle" style="height:24px;color:#f99;padding:0px;padding-top:8px;text-align:center;">(message in red)</div>-->
+			<div id="starter" class="middle"></div>
+			<div id="edit" class="middle">
+				<textarea id="quickGameData" placeholder="enter generator code here"></textarea>
+				<textarea id="quickCSS" placeholder="edit site CSS here"></textarea>
+			</div>
+			<div id="loading" class="middle">
+				<div id="javascriptError">
+						<b>Oops, looks like the generator isn't loading right!</b><br>
+						Please make sure your javascript is enabled, then refresh.<br>
+						This could also be caused by a problem on our side, in which case - wait a moment, then refresh!
+						<!--<div style="font-weight:bold;font-size:20px;margin-top:8px;">CURRENTLY WORKING ON STUFF. THIS MIGHT TAKE A WHILE. HOLD ON TIGHT!</div>-->
+				</div>
+			</div>
+			<div id="home" class="middle">
+				<div style="width:50%;margin:auto;">
+					<br>
+					<div style="width:128px;height:128px;background:url(random2.png);margin:16px auto;"></div>
+					<p><big>Welcome to <b>RandomGen</b> : a simple tool to create random text generators, and a directory of such generators.</big></p>
+					<br>
+					You may check out the existing generators above, or <a href="index.html%3Fdo=create.html">try making one yourself</a>.<br>
+					<br>
+					You might also like <a href="nested.html" target="_blank">Nested</a>, a universe generator I made a while ago.<br>
+					<br>
+					RandomGen was created by <a href="index.html">Orteil</a>, some guy who really likes random generators.
+				</div>
+			</div>
+			<div id="create" class="middle">
+				<div>
+					<br>
+					<p><big>Alright, let's make some stuff!</big></p>
+					<br>
+					<h1>First : a few things</h1>
+						<h2>What's a random generator?</h2>
+							<p>A random generator is a simple application that produces random text at the click of a button. There are generators that output random names, others that write descriptions of strange imaginary monsters, but you could imagine a generator for just about anything - such as a generator that returns a random story, or a random cooking recipe!</p>
+						<br>
+						<h2>So how do I make a generator?</h2>
+							<p>Well, it's fairly easy. All generators in RandomGen are simply text files that our website converts into generators.<br>
+							To make your own generator, you will have to write that text file using the syntax described below (you'll see, you can do all kinds of neat stuff). Here's what a finished generator source file looks like : <a href="http://pastebin.com/raw.php?i=cKeB4v4J" target="_blank">http://pastebin.com/raw.php?i=cKeB4v4J</a>. Pretty readable, huh?</p>
+							<p>You will then have to find a place online to store your text file (<a href="http://pastebin.com/" target="_blank">pastebin.com</a> is a good one; your text files are hosted for free and, if you register, you can edit them as much as you want. <a href="http://www.topsite.com/best/paste" target="_blank">Here are some other text-hosting sites</a>).</p>
+							<p>Once you're happy with your new generator, all that remains to do is to share it with the world!</p>
+						<br>
+						<h2>How do I use my generator once it's written?</h2>
+							<p>To use a generator, take its source file's URL and append it to <b>https://orteil.dashnet.org/randomgen/?gen=</b>.<br>A generator stored at <b>www.example.com/mygenerator.txt</b> would be usable at <b>https://orteil.dashnet.org/randomgen/?gen=www.example.com/mygenerator.txt</b>.
+							<ul>
+								<li>If your generator is hosted on pastebin.com, you only have to refer to its identifier (the letters at the end of its url). For example, <a href="http://pastebin.com/cKeB4v4J" target="_blank">http://pastebin.com/cKeB4v4J</a> becomes <a href="index.html%3Fgen=cKeB4v4J.html" target="_blank">https://orteil.dashnet.org/randomgen/?gen=cKeB4v4J</a>.</li>
+								<li><b>Note :</b> when hosting your file on pastebin.com, make sure you're registered - or you won't be able to edit your generator later! Also make sure to set the file to never expire, and to make it either public or unlisted.</li>
+								<li>If you're not hosted on pastebin.com, make sure your file is a .txt file! Your generator won't work with any other file type.</li>
+							</ul>
+							</p>
+						<br>
+						<h2>General tips about writing generators</h2>
+							<p>
+							<ul>
+							<li>You can make a generator for practically <i>anything</i>.</li>
+							<li>Spend some time examining the source files of other generators, you'll probably learn some cool tricks.</li>
+							<li>Remember to test your generator. <i>A lot.</i></li>
+							<li>Keep backups of your generator's source - you never know!</li>
+							<li>Adding a description, picture, and some nice formatting can really help your generator stick out.</li>
+							<li>Beware of spelling mistakes, they can quickly make a generator appear very unprofessional. Use spell-check!</li>
+							<li>This page doesn't include all the tricks and subtleties of RandomGen - again, check out the source of existing generators, and see what's happening on the <a href="https://www.reddit.com/r/randomgen/" target="_blank">RandomGen subreddit</a>!</li>
+							</ul>
+							</p>
+						<br>
+					<h1>Writing source files</h1>
+						<h2>Quick overview</h2>
+							<p>
+							To create a random generator, you simply have to define lists of things that reference each other. For example :<br>
+							<pre>
+	$animal
+	cat
+	dog
+	fish
+
+	$phrase
+	My pet is a [animal].
+	I am feeding my [animal].
+							</pre><br>
+							This will generate sentences such as "My pet is a cat", or "I am feeding my fish".<br>
+							The last list declared will be used as the base generator (in this case : $phrase).<br>
+							You can change how many items are generated by adding "<pre>&amount=10</pre>" to the url; you can also change the base generator by adding "<pre>&seed=element</pre>".<br>
+							</p>
+						<br>
+						<h2>Global settings</h2>
+							<pre>$name : My Generator</pre><br>
+							<pre>$author : Author</pre><br>
+							<pre>$description : Description of my generator</pre><br>
+							<pre>$picture : http://.../pic.png</pre><br>
+							(should be 128x128px)<br>
+							<pre>$amount : 3</pre><br>
+							sets the default amount of results the generator should yield<br>
+							<pre>$button : Another!</pre><br>
+							sets the text for the "Generate" button<br>
+							<br>
+						<h2>Inclusions</h2>
+							<pre>$include http://url.com</pre><br>
+							This adds to your generator everything defined in the generator at the specified URL.<br>
+							Inclusions should always be declared at the top of the file, before any other data.<br>
+							Try to use as few inclusions as possible, as they make the loading time for your generator much longer.<br>
+							You are encouraged to create "utility generators" full of lists (such as names or colors) that other people can include in their own generators to expand them easily.<br>
+							<br>
+						<h2>Creating lists of elements</h2>
+							<pre>$animal</pre><br>
+							Starts a new list with the identifier "animal".<br>
+							<pre>$+animal</pre><br>
+							Starts adding elements to the list with this identifier. This is good for expanding on included lists.<br>
+							<pre>$>animal</pre><br>
+							Adds this element as a base generator that can be selected from the "Root" dropdown menu. (You can also apply this setting globally by having "$all roots" somewhere in your file.)<br>
+							<pre>fish</pre><br>
+							Adds a new element named "fish" to the current list.<br>
+							<pre>fish {20%}</pre><br>
+							Adds a new element to the current list, but this element will only have a 20% chance of being added to the random selection table.<br>
+							<br>
+						<h2>Nesting elements</h2>
+							<pre>I own a [animal].</pre><br>
+							[animal] will be replaced by a random element from the $animal list.<br>
+							<pre>I need a quick random [word|term|thing to say].</pre><br>
+							This returns one of the elements between brackets at random, without needing to create a separate list.<br>
+							Can even be nested with regular lists, as such :<br>
+							<pre>I am eating a [[fruit]|[vegetable]|[candy]].</pre><br>
+							This can quickly get complicated - make sure to keep track of your brackets!<br>
+							<br>
+						<h2>Identifiers</h2>
+							<pre>My pet is a [animal,#pet]. I've always wanted a [#pet].</pre><br>
+							Remembers the animal by its identifier (#pet) and returns the same animal in both instances.<br>
+							<pre>My [#pet]'s name is [name,#name,written]. Would you like to see [#name]?</pre><br>
+							Adding "written" will record the element as its literal representation, instead of its generator. This is necessary in some cases.<br>
+							<br>
+						<h2>Attributes</h2>
+							Check this out :<br>
+							<pre>
+	$animal
+	cat {action:meows}
+	dog {action:barks}
+	fish {action:swims}
+	
+	$phrase
+	I have a [animal,#pet]. My [#pet] is [#pet,as action].</pre>
+							<p>This is a bit trickier. The syntax {attribute:value} will add custom properties to elements which can be referred to later. You could use this for things such as gender, verb tenses, alternate descriptions, and so on.</p>
+							<pre>My [#pet] is [#pet,as action,or sleeping]</pre>
+							<p>This defines what to fall back to ("sleeping") if the specified attribute doesn't exist for an element.</p>
+						<h2>Templating</h2>
+							Here's another way of constructing complex outputs.<br>
+							<pre>
+	$phrase
+	Look at my %1.
+	I love my %1 and my %2.
+	$out
+	"[phrase,%[cat|dog],%[wife|husband|kids]]"</pre>
+							<p>This will give a phrase where %1 is replaced with [cat|dog] (which itself will be parsed into "cat" or "dog") and, if present, %2 with "wife"/"husband"/"kids".</p>
+						<h2>Utilities and other fun things</h2>
+							<pre>There are [100-10000] leaves here.</pre>
+							<p>Returns a random number between two bounds.</p>
+							<pre>My name is [random syllable,x2-6].</pre>
+							<p>The "x2-6" will return between two and 6 of the specified element.</p>
+							<pre>There is [an] [word].</pre>
+							<p>[an] will be replaced by "a" or "an", depending on the next letter.</p>
+							<pre>Look at all the [animal][s]!</pre>
+							<p>[s] will replace the previous word to its proper plural (this is not fool-proof and can sometimes return silly results).</p>
+							<pre>The book's cover reads "[book name,title]".</pre>
+							<p>The "book name" will have title-like capitalization ("my cat has asthma" will be converted to "My Cat Has Asthma").</p>
+							<pre>Look at my [animal]. Look At My [Animal]. LOOK AT MY [ANIMAL]!!!</pre>
+							<p>The engine will detect the proper letter case and will respectively return : "Look at my cat. Look At My Cat. LOOK AT MY CAT!!!"</p>
+							<p>This might not always work; if you need to capitalize something like [#pet], you can write [#1,Abc].</p>
+							<pre>hey let's go see [movie name,lower]</pre>
+							<p>"movie name" will be rendered in all lower case.</p>
+							<pre>(talking fast) [phrase,compress]!</pre>
+							<p>"phrase" will render with no spaces at all, so "I love horses" will become "Ilovehorses".</p>
+							<pre>[word,first part]...[word,middle part]...[word,last part]</pre>
+							<p>Returns a third of "word" as specified; "first part" of "abcdefghi" would display as "abc".</p>
+							<pre>This is a [animal,mundane], and this is a [animal,mundane].</pre>
+							<p>Normally, RandomGen tries not to repeat the same thing twice in the same output. Specifying "mundane" means that the randomly-chosen animals are allowed to be duplicates.</p>
+							<pre>$allow duplicates</pre>
+							<p>Adding this anywhere in your file negates the default behavior where RandomGen tries not to repeat things when picking from random selections.</p>
+							<pre>[animal,#pet,hidden]My pet is [#pet,as action].</pre>
+							<p>Adding "hidden" means this element won't be displayed, which lets you set identifiers without having to have them in the output text.</p>
+							<br>
+						<h2>Shindan</h2>
+							<pre>$seed text : Enter your name here!</pre>
+							<p>This turns your generator into a shindan. What this means is the user is prompted to enter text as a seed (usually their name), and your generator will generate the same result every time for that seed. "Shindan" is japanese for "diagnosis"; this system is often used as a fun way to determine someone's love-bound celebrity or what animal they are or to read their fortune.</p>
+							<pre>You are [seed], a proud [warrior|wizard|ranger].</pre>
+							<p>The keyword "seed" will be replaced by whatever seed the user inputs.</p>
+							<br>
+						<h2>Formatting with html</h2>
+							<p>Finally, you can use some <a href="http://www.w3schools.com/html/html_intro.asp" target="_blank">html tags</a> to add a bit of formatting.<br>
+							Tags allowed are &lt;b&gt;, &lt;i&gt;, &lt;u&gt;, &lt;q&gt;, &lt;p&gt;, &lt;small&gt;, &lt;big&gt;, &lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt; and &lt;br&gt;.</p>
+						<h2>On whitespace</h2>
+							<p>RandomGen trims the spaces at the start and end of lines. If you want a space there, you'll have to type it between brackets, as [ ].</p>
+					<br>
+					<h1>Conclusion</h1>
+						<h2>Closing words</h2>
+							<p>Ready to show off your new generator? Take its url and share it with anyone you want. Send it to your family, your friends, your dog!</p>
+							<p>People on the unofficial <a href="https://www.reddit.com/r/randomgen/" target="_blank">RandomGen subreddit</a> or on our <a href="https://discordapp.com/invite/cookie" target="_blank">Discord server</a> will be more than happy to try your generator and give you feedback. And who knows, if your generator makes enough noise, we might even end up adding it to the list!</p>
+						<h2>Credits</h2>
+							<p><b>RandomGen</b> is an app by Orteil and Opti, 2014-2020. All rights reserved.</p>
+							<p>We hope you have as much fun using it as we had making it!</p>
+							<p>Need to contact us? See our <a href="https://orteil.dashnet.org/randomgen/" target="_blank">homepage</a>.</p>
+						
+				</div>
+			</div>
+			<div id="content" class="middle">
+				<div id="header">
+					<div id="info">
+						<div id="gameHeader">
+							<div id="gameNameAndAuthor"></div>
+							<a id="gameSource" class="whiteLink" target="_blank" href="index.html%3Fgen=job.txt.html">View source</a>
+						</div>
+						<div id="gameDesc"></div>
+						<div id="gameSeed" style="display:none;">
+							<div id="gameSeedPrompt">Enter your seed here!</div>
+							<input type="text" maxlength="200" id="seedInput" placeholder="Type here..."/>
+						</div>
+						<div id="gameGenerate" style="display:none;">
+							<div id="gameGenerateLeft">
+								<div id="generateButton" class="button" onclick="Game.Generate();">Generate</div>
+							</div>
+							<div id="gameGenerateRight">
+								<label>Amount : <input type="text" maxlength="2" size="2" id="amountInput"/></label>
+								<label>Root : <select id="rootInput"></select/></label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="pic"></div>
+				<div id="text">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a5502aa6b9b3ed74',t:'MTc5Mzc1OTExMA=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a5502aa6b9b3ed74',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
