@@ -20,6 +20,70 @@ download_list() {
     wget --user-agent="$USER_AGENT" "$@" -B "$base_url" < "$list"
 }
 
+download_html_pages() {
+  local origin="${BASE_URL%/cookieclicker}"
+  local page_links
+  local href
+  local url
+  local path
+
+  page_links="$(mktemp)"
+  trap 'rm -f "$page_links"' RETURN
+
+  while IFS= read -r href; do
+    case "$href" in
+      \#*|'mailto:'*|'javascript:'*|'data:'*|'')
+        continue
+        ;;
+      //*)
+        case "$href" in
+            "//orteil.dashnet.org/"*)
+              url="http:$href"
+              ;;
+            *)
+              continue
+            ;;
+        esac
+        ;;
+      http://orteil.dashnet.org/*|https://orteil.dashnet.org/*)
+        url="$href"
+        ;;
+      http://*|https://*)
+        continue
+        ;;
+      /*)
+        url="$origin$href"
+        ;;
+      ../*|..)
+        continue
+        ;;
+      *)
+        url="$BASE_URL/${href#./}"
+        ;;
+    esac
+
+    path="${url%%[\?#]*}"
+    case "$path" in
+      *.css|*.gif|*.ico|*.jpg|*.jpeg|*.js|*.json|*.mp3|*.ogg|*.png|*.svg|*.ttf|*.wav|*.webm|*.woff|*.woff2)
+        continue
+        ;;
+    esac
+    printf '%s\n' "$url"
+  done < <(grep -Po "(?i)(?<=href=[\"'])[^\"']+" "$ROOT_DIR/index.html") |
+    sort -u > "$page_links"
+
+  {
+    printf '%s\n' "$BASE_URL/"
+    cat "$page_links"
+  } | sort -u > "$page_links.all"
+
+  wget --user-agent="$USER_AGENT" \
+    --recursive --level=1 --page-requisites --convert-links --adjust-extension \
+    --no-host-directories --cut-dirs=1 --domains=orteil.dashnet.org \
+    --directory-prefix="$ROOT_DIR" --input-file="$page_links.all"
+  rm -f "$page_links.all"
+}
+
 rm -rf "$ROOT_DIR/img" "$ROOT_DIR/loc" "$ROOT_DIR/snd"
 mkdir -p "$ROOT_DIR/img" "$ROOT_DIR/loc" "$ROOT_DIR/snd"
 
@@ -44,6 +108,7 @@ download_list _loclist.txt "$BASE_URL/loc/"
 
 cd "$ROOT_DIR"
 wget --user-agent="$USER_AGENT" -O index.html "$BASE_URL/"
+download_html_pages
 wget --user-agent="$USER_AGENT" -O style.css "$BASE_URL/style.css"
 download_list _jslist.txt "$BASE_URL/"
 wget --user-agent="$USER_AGENT" -O grab.txt http://orteil.dashnet.org/patreon/grab.php

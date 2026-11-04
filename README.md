@@ -13,6 +13,8 @@ If the original game updates, here is how you can update the mirror:
 The automated script downloads manifest entries concurrently. Set
 `DOWNLOAD_CONNECTIONS` to change the number of simultaneous downloads
 (defaults to `8`), then run `DOWNLOAD_CONNECTIONS=16 ./update.sh`.
+It also mirrors same-site HTML links, including beta pages, and rewrites them
+for local use. Offsite HTML pages are not downloaded.
 
 #### 1. Fetch all new images :
 
